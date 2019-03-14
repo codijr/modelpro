@@ -1,0 +1,17 @@
+{
+    "dashboard": {
+        "controller": "Dashboard",
+        "method": "getAllProjects"
+    },
+    "project/:id": {
+        "controller": "Project",
+        "method": "get",
+        "params": {
+            "id": "number"
+        }
+    },
+    "login": {
+        "controller": "User",
+        "method": "login"
+    }
+}
