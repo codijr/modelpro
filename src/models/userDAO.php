@@ -4,12 +4,15 @@ namespace ModelPro\Models;
 use ModelPro\Models\User;
 use ModelPro\Exceptions\NotFoundException;
 
-class UserDAO extends AbstractModel {
+/**
+ * Data Access Object para a entidade de usuário.
+ */
+class UserDAO extends AbstractDAO {
     
-    public function get ($userId) {
+    public function get ($id) {
         $query = 'SELECT * FROM user WHERE user_id = :id';
         $sth = $this->database->prepare($query);
-        $sth->execute(['id' => $userId]);
+        $sth->execute(['id' => $id]);
 
         $row = $sth->fetch();
 

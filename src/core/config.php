@@ -1,5 +1,5 @@
 <?php
-namespace ModelPro\Utils;
+namespace ModelPro\Core;
 
 /**
  * Singleton das configurações.

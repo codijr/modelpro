@@ -1,8 +1,11 @@
 <?php
 namespace ModelPro\Models;
 
+/**
+ * Modelo do usuário.
+ */
 class User {
-    public $id;
+    public $user_id;
     public $username;
     public $password;
     public $admin_level;

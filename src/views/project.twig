@@ -1,6 +1,14 @@
-<hr>
+{% extends 'layout.twig' %}
 
-<h2>{{ project.codename }}</h2>
-<h2>{{ project.number }}</h2>
+{% block title %}
+    {{ project.number }} - {{ project.codename }}
+{% endblock %}
 
-<hr>
+{% block content %}
+    <a href="/dashboard">Retornar</a>
+    <hr>
+    <h2>{{ project.codename }}</h2>
+    <h4>{{ project.number }}</h4>
+    <p>{{ project.description }}</p>
+    <hr>
+{% endblock %}

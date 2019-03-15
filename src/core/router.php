@@ -1,9 +1,8 @@
 <?php
 namespace ModelPro\Core;
 
-use ModelPro\Controllers\DashboardController;
-use ModelPro\Controllers\ProjectController;
 use ModelPro\Controllers\ErrorController;
+use ModelPro\Controllers\UserController;
 
 /**
  * Classe do Router, que identifica e corretamente encaminha os parametros de URL
@@ -53,7 +52,7 @@ class Router {
         $routeParts = explode('/', $route);
 
         foreach ($routeParts as $key => $routePart) {
-            if (strpos($routePart, ':') == 0) {
+            if (strpos($routePart, ':') === 0) {
                 $name = substr($routePart, 1);
                 $params[$name] = $pathParts[$key+1];
             }
@@ -68,7 +67,7 @@ class Router {
 
         // Se a página necessita de login, checar se o id do usuário está nos cookies.
         // PS: inseguro
-        if (isste($info['login']) && $info['login']) {
+        if (isset($info['login']) && $info['login']) {
             if ($request->getCookies()->has('user')) {
                 $userId = $request->getCookies()->get('user');
                 $controller->setUserId($userId);

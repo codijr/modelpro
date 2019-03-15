@@ -1,20 +1,14 @@
 <?php
 namespace ModelPro\Controllers;
 
-use ModelPro\Core\Request;
-
-class ErrorController {
-    private $request;
-
-    public function __construct (Request $request) {
-        $this->request = $request;
-    }
-
+class ErrorController extends AbstractController{
     public function notFound () {
-        return "caminho errado :(";
+        $properties = ['errorMessage' => 'Pagina não encontrada :('];
+        return $this->render('error.twig', $properties);
     }
 
     public function login () {
-        return "login doko";
+        $properties = ['errorMessage' => 'Você deve está logado para acessar essa página! >:(]'];
+        return $this->render('error.twig', $properties);
     }
 }

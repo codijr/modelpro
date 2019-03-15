@@ -6,32 +6,40 @@ use Bookstore\Exceptions\DbException;
 use ModelPro\Exceptions\NotFoundException;
 use PDO;
 
-class ProjectDAO extends AbstractModel {
+/**
+ * Data Access Object para a entidade de projeto.
+ */
+class ProjectDAO extends AbstractDAO {
     const CLASSNAME = '\ModelPro\Models\Project';
 
-    public function get ($projectId) {
+    /** Get um projeto de id x */
+    public function get ($id) {
         $query = 'SELECT * FROM projects WHERE project_id = :id';
         $stmt = $this->database->prepare($query);
-        $stmt->execute(['id' => $projectId]);
+        $stmt->execute(['id' => $id]);
 
         $row = $stmt->fetch();
 
         if (empty($row)) {
             throw new NotFoundException;
         }
-
-        return new Project($row['project_id'], $row['codename']);
+        $result = new Project($row['project_id'], $row['codename'], $row['number']);
+        $result->description = $row['description'];
+        return $result;
     }
 
+    /** Get todos os projetos */
     public function getAll () {
         $query = 'SELECT * FROM projects';
         $stmt = $this->database->prepare($query);
         $stmt->execute();
 
-        if (empty($row)) {
+        $results = $stmt->fetchAll();
+
+        if (empty($results)) {
             throw new NotFoundException;
         }
-        $results = $stmt->fetchAll(PDO::FETCH_CLASS, self::CLASSNAME);
+
         return $results;
     }
 }

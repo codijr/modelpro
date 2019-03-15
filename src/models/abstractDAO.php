@@ -3,7 +3,7 @@ namespace ModelPro\Models;
 
 use PDO;
 
-abstract class AbstractModel {
+abstract class AbstractDAO {
     protected $database;
 
     public function __construct (PDO $database) {

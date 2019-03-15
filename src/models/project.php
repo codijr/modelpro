@@ -1,8 +1,11 @@
 <?php
 namespace ModelPro\Models;
 
+/**
+ * Modelo de projeto.
+ */
 class Project {
-    public $id;
+    public $project_id;
     public $codename;
     public $number;
     public $description;
@@ -15,9 +18,10 @@ class Project {
     
     public $tags;
 
-    public function __construct ($id, $codename) {
+    public function __construct ($id, $codename, $number) {
         $this->id = $id;
         $this->codename = $codename;
+        $this->number = $number;
     }
 
 }

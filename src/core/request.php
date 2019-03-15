@@ -1,6 +1,9 @@
 <?php
 namespace ModelPro\Core;
 
+/**
+ * Classe para filtrar as requisições/cookies e manipulá-las de forma mais segura.
+ */
 class Request {
     const GET = 'GET';
     const POST = 'POST';

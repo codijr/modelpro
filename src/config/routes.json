@@ -1,7 +1,11 @@
 {
-    "dashboard": {
+    "": {
         "controller": "Dashboard",
-        "method": "getAllProjects"
+        "method": "dashboard"
+    },
+    "dashboard/": {
+        "controller": "Dashboard",
+        "method": "dashboard"
     },
     "project/:id": {
         "controller": "Project",
@@ -10,7 +14,7 @@
             "id": "number"
         }
     },
-    "login": {
+    "login/": {
         "controller": "User",
         "method": "login"
     }
