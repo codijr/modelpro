@@ -25,7 +25,7 @@ class Router {
         // Buscar dentre as rotas definidas a representada pela requisição
         foreach ($this->routeMap as $route => $info) {
             $regexRoute = $this->getRegexRoute($route, $info);
-            if (preg_match("@^/$regexRoute$@", $path) || preg_match("@^/$regexRoute/$@", $path)) {
+            if (preg_match("@^/$regexRoute(/)?$@", $path)) {
                 return $this->executeController($route, $path, $info, $request);
             }
         }
