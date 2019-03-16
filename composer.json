@@ -1,0 +1,10 @@
+{
+    "require": {
+        "twig/twig": "1.36.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ModelPro\\": "src"
+        }
+    }
+}
