@@ -5,7 +5,7 @@ use ModelPro\Controllers\ErrorController;
 use ModelPro\Controllers\UserController;
 
 /**
- * Classe do Router, que identifica e corretamente encaminha os parametros de URL
+ * Classe do Router, que identifica e corretamente encaminha as rotas e parametros de URL.
  */
 class Router {
     private $routeMap;
@@ -19,10 +19,13 @@ class Router {
         $this->routeMap = json_decode($json, true);
     }
 
+    /**
+     * Função que encaminha a request para o controller correspondente e o executa.
+     */
     public function route (Request $request) {
         $path = $request->getPath();
 
-        // Buscar dentre as rotas definidas a representada pela requisição
+        // Buscar dentre as rotas definidas a representada pelo $path
         foreach ($this->routeMap as $route => $info) {
             $regexRoute = $this->getRegexRoute($route, $info);
             if (preg_match("@^/$regexRoute(/)?$@", $path)) {
@@ -61,6 +64,10 @@ class Router {
         return $params;
     }
 
+    /**
+     * Função que executa o controller associado com a rota, de acordo com a definição
+     * dada no routes.json
+     */
     private function executeController ($route, $path, array $info, Request $request) {
         $controllerName = 'ModelPro\Controllers\\' . $info['controller'] . 'Controller';
         $controller = new $controllerName($request);

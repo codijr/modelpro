@@ -2,9 +2,10 @@
 
 Sistema web que implementa de forma digital e dinâmica o controle de projetos criado pela Diretoria de Projetos no semestre de 2018.1, propondo organizar os registros de projetos da CoDiJr de forma autônoma e simples.
 
-## Instalação
+## Ambiente
 Antes de instalar o sistema, é necessário um ambiente com Apache, MySQL e PHP >5.x instalados.
 
+## Instruções
 1.  Instale o [Composer](https://getcomposer.org/), seguindo as instruções do site.
 2.  Navegue para o diretório do projeto no terminal e execute o comando abaixo.
     ```php

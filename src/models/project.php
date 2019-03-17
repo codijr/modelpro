@@ -7,21 +7,19 @@ namespace ModelPro\Models;
 class Project {
     public $project_id;
     public $codename;
-    public $number;
+    public $code;
     public $description;
     public $start_date;
     public $end_date;
     
     public $scope;
-
     public $links;
-    
     public $tags;
 
-    public function __construct ($id, $codename, $number) {
+    public function __construct ($id, $codename, $code) {
         $this->id = $id;
         $this->codename = $codename;
-        $this->number = $number;
+        $this->code = $code;
     }
 
 }

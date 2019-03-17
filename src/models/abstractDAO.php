@@ -3,6 +3,9 @@ namespace ModelPro\Models;
 
 use PDO;
 
+/**
+ * Modelo abstrato para as classes DAO. Possui somente a referência para o BD.
+ */
 abstract class AbstractDAO {
     protected $database;
 

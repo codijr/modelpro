@@ -3,7 +3,9 @@ namespace ModelPro\Controllers;
 
 use ModelPro\Core\Database;
 use ModelPro\Models\ProjectDAO;
-
+/**
+ * Controller da página individual do projeto.
+ */
 class ProjectController extends AbstractController{
     public function get ($id) {
         $dao = new ProjectDAO($this->database);

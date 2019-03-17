@@ -6,6 +6,7 @@ use PDO;
 
 /**
  * Singleton de acesso ao banco de dados, usado pelos DAOs.
+ * Ao pegar a instância ela retorna o objeto PDO referênte a conexão.
  */
 class Database {
     private static function connect () {

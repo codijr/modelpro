@@ -1,6 +1,8 @@
 <?php
 namespace ModelPro\Controllers;
-
+/**
+ * Controller da página de erro.
+ */
 class ErrorController extends AbstractController{
     public function notFound () {
         $properties = ['errorMessage' => 'Pagina não encontrada :('];

@@ -7,12 +7,15 @@ use ModelPro\Core\Request;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 
+/**
+ * Controller pai com as variáveis de referência a requisição, database, config e twig.
+ * Os outros controladores vão herdar dessa.
+ */
 class AbstractController {
     protected $request;
     protected $database;
     protected $config;
     protected $view;
-    protected $log;
 
     public function __construct (Request $request) {
         $this->request = $request;
