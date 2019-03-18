@@ -7,12 +7,12 @@
 {% block content %}
     <h2>Dashboard</h2>
     <hr>
-
+    <a> Criar novo projeto </a>
     <section id="list-project">
     {% for project in projects %}
         <div class="card card-project">
             <h4><a href="/project/{{ project.project_id }}">{{ project.codename }}</a></h4>
-            <h6>{{ project.number }}</h6>
+            <h6>{{ project.code }}   -   {{ project.client_id }}</h6>
         </div>
     {% endfor %}
     </section>
