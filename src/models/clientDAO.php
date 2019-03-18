@@ -39,14 +39,13 @@ class clientDAO extends AbstractDAO {
 
     /** Add um cliente */
     public function add (Client $client) {
-        $query = 'INSERT INTO clients VALUES (:1, :2, :3, :4)';
+        $query = 'INSERT INTO clients (name, email, phone_number) VALUES (:1, :2, :3)';
         try {
             $stmt = $this->database->prepare($query);
             $stmt->execute([
-                '1' => $client->client_id,
-                '2' => $client->name,
-                '3' => $client->email,
-                '4' => $client->phone_number
+                '1' => $client->getName(),
+                '2' => $client->getEmail(),
+                '3' => $client->getPhoneNumber()
             ]);
         } catch (\Exception $e) {
             throw new DbException;
@@ -54,16 +53,16 @@ class clientDAO extends AbstractDAO {
     }
 
     /** Update um cliente de id x */
-    public function update ($id, $client) {
+    public function update ($id, Client $client) {
         $this->database->beginTransaction();
         $query = 'UPDATE clients SET (name=:1, email=:2, phone_number=:3) WHERE client_id = :id';
         try {
             $stmt = $this->database->prepare($query);
             $stmt->execute([
                 'id' => $id,
-                '1' => $client->name,
-                '2' => $client->email,
-                '3' => $client->phone_number
+                '1' => $client->getName(),
+                '2' => $client->getEmail(),
+                '3' => $client->getPhoneNumber()
             ]);
             $this->database->commit();
         } catch (\Exception $e) {
