@@ -10,7 +10,7 @@ class Client {
     private $email;
     private $phone_number;
 
-    public function __construct ($id, $name, $email, $phone_number) {
+    public function __construct ($id=NULL, $name, $email, $phone_number) {
         $this->client_id = $id;
         $this->name = $name;
         $this->email = $email;

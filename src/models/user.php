@@ -16,7 +16,7 @@ class User {
     private $job_title;
     private $entrance_semester;
 
-    public function __construct ($id, $name) {
+    public function __construct ($id=NULL, $name) {
         $this->$id = $id;
         $this->$name = $name;
     }

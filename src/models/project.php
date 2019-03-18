@@ -19,7 +19,7 @@ class Project {
     private $links;
     private $tags;
 
-    public function __construct ($id, $codename, $code) {
+    public function __construct ($id=NULL, $codename, $code) {
         $this->id = $id;
         $this->codename = $codename;
         $this->code = $code;
