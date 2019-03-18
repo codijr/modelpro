@@ -5,7 +5,7 @@ use ModelPro\Exceptions\DbException;
 
 
 class clientDAO extends AbstractDAO {
-    const CLASSNAME = '\ModelPro\Models\Project';
+    const CLASSNAME = '\ModelPro\Models\Client';
 
     /** Get um cliente de id x */
     public function get ($id) {
