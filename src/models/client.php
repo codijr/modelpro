@@ -17,43 +17,83 @@ class Client {
         $this->phone_number = $phone_number;
     }
 
-    public function getId ()
+    /**
+     * Get o valor de client_id
+     */ 
+    public function getClientId()
     {
         return $this->client_id;
     }
 
-    public function setId ($new_value)
+    /**
+     * Set o valor de client_id
+     *
+     * @return  self
+     */ 
+    public function setClientId($client_id)
     {
-        $this->client_id = $new_value;
+        $this->client_id = $client_id;
+
+        return $this;
     }
 
-    public function getName ()
+    /**
+     * Get o valor de name
+     */ 
+    public function getName()
     {
         return $this->name;
     }
 
-    public function setName ($new_value)
+    /**
+     * Set o valor de name
+     *
+     * @return  self
+     */ 
+    public function setName($name)
     {
-        $this->name = $new_value;
+        $this->name = $name;
+
+        return $this;
     }
 
-    public function getEmail ()
+    /**
+     * Get o valor de email
+     */ 
+    public function getEmail()
     {
         return $this->email;
     }
 
-    public function setEmail ($new_value)
+    /**
+     * Set o valor de email
+     *
+     * @return  self
+     */ 
+    public function setEmail($email)
     {
-        $this->email = $new_value;
+        $this->email = $email;
+
+        return $this;
     }
 
-    public function getPhoneNumber ()
+    /**
+     * Get o valor de phone_number
+     */ 
+    public function getPhoneNumber()
     {
         return $this->phone_number;
     }
 
-    public function setPhoneNumber ($new_value)
+    /**
+     * Set o valor de phone_number
+     *
+     * @return  self
+     */ 
+    public function setPhoneNumber($phone_number)
     {
-        $this->phone_number = $new_value;
+        $this->phone_number = $phone_number;
+
+        return $this;
     }
 }
