@@ -1,20 +1,31 @@
 {% extends 'layout.twig' %}
 
 {% block title %}
-    {{ project.number }} - {{ project.codename }}
+    {{project.code}} - {{project.codename}}
 {% endblock %}
 
 {% block content %}
-    <a href="/dashboard">Retornar</a>
-    <a href="/dashboard">Editar</a>
+    <nav>
+        <a href="/dashboard">Retornar</a>
+        <a href="/project/{{project.projectId}}/edit">Editar</a>
+    </nav>
     <hr>
-    <h2>{{ project.codename }}</h2>
-    <h4>{{ project.code }}</h4>
-    <p>{{ project.description }}</p>
+    <h2>{{project.code}} - {{project.codename}}</h2>
+    <p>{{project.description}}</p>
+    <p>{{project.startDate}}  -  {{project.endDate}}</p>
+    <p>{{project.tags}}</p>
     <hr>
-    <p>{{ project.start_date }}</p>
-    <p>{{ project.end_date }}</p>
-    <p>{{ project.scope }}</p>
-    <p>{{ project.links }}</p>
-    <p>{{ project.tags }}</p>
+    <h3>Escopo</h3>
+    <p>{{project.scope}}</p>
+    <hr>
+    <h3>Links</h3>
+    <p>{{project.links}}</p>
+    <hr>
+    <h3>Cliente</h3>
+    <p>{{client.name}}</p>
+    <p>{{client.email}}</p>
+    <p>{{client.phoneNumber}}</p>
+    <hr>
+    <h3>Equipe</h3>
+    <p>user.name, user.job_title</p>
 {% endblock %}

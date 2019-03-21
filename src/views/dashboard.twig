@@ -7,13 +7,34 @@
 {% block content %}
     <h2>Dashboard</h2>
     <hr>
-    <a> Criar novo projeto </a>
+    <a href="/dashboard/add-project"> Criar novo projeto </a>
     <section id="list-project">
-    {% for project in projects %}
+        <h3>Em andamento</h3>
+        {% for project in projects %}
+        {% if project.status == 0 %}
         <div class="card card-project">
-            <h4><a href="/project/{{ project.project_id }}">{{ project.codename }}</a></h4>
-            <h6>{{ project.code }}   -   {{ project.client_id }}</h6>
+            <h4><a href="/project/{{ project.projectId }}">{{project.codename}}</a></h4>
+            <h5>{{project.code}}   -   {{clients[project.clientId]}}</h5>
         </div>
-    {% endfor %}
+        {% endif %}
+        {% endfor %}
+        <h3>Finalizados</h3>
+        {% for project in projects %}
+        {% if project.status == 1 %}
+        <div class="card card-project">
+            <h4><a href="/project/{{ project.projectId }}">{{project.codename}}</a></h4>
+            <h5>{{project.code}}   -   {{clients[project.clientId]}}</h5>
+        </div>
+        {% endif %}
+        {% endfor %}
+        <h3>Arquivados</h3>
+        {% for project in projects %}
+        {% if project.status == 2 %}
+        <div class="card card-project">
+            <h4><a href="/project/{{ project.projectId }}">{{project.codename}}</a></h4>
+            <h5>{{project.code}}   -   {{clients[project.clientId]}}</h5>
+        </div>
+        {% endif %}
+        {% endfor %}
     </section>
 {% endblock %}
