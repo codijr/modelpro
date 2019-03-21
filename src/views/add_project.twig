@@ -1,0 +1,29 @@
+{% extends 'layout.twig' %}
+
+{% block title %}
+    Novo Projeto
+{% endblock %}
+
+{% block content %}
+    <form method="POST" action="/dashboard/add-project/save">
+        <nav>
+            <a href="/dashboard">Cancelar</a>
+            <input type="submit" value="Salvar">
+        </nav>
+        <input type="text" name="codename" placeholder="Titulo do projeto" required>
+        <input type="number" name="code" placeholder="Código" required>
+        <br>
+        <input type="text" name="description" placeholder="Descrição" required>
+        <br>
+        <input type="date" name="start_date" placeholder="" required>
+        <input type="date" name="end_date" placeholder="" required>
+        <br>
+        <input type="text" name="scope" placeholder="Escopo" required>
+        <br>
+        <input type="text" name="links" placeholder="Links" required>
+        <br>
+        <input type="text" name="tags" placeholder="Tags" required>
+        <br>
+        <input type="number" name="client_id" placeholder="ID do cliente" required>
+    </form>
+{% endblock %}

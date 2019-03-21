@@ -1,0 +1,31 @@
+{% extends 'layout.twig' %}
+
+{% block title %}
+    {{project.codename}} - Modo edição
+{% endblock %}
+
+{% block content %}
+    <form method="POST" action="update">
+        <nav>
+            <a href="/project/{{project.projectId}}">Cancelar</a>
+            <input type="submit" value="Salvar">
+        </nav>
+        <input type="text" name="codename" value="{{project.codename}}" required>
+        <input type="number" name="code" value="{{project.code}}" required>
+        <br>
+        <input type="text" name="description" value="{{project.description}}" required>
+        <br>
+        <input type="date" name="start_date" value="{{project.startDate}}" required>
+        <input type="date" name="end_date" value="{{project.endDate}}" required>
+        <br>
+        <input type="number" name="status" value="{{project.status}}" required>
+        <br>
+        <input type="text" name="scope" value="{{project.scope}}" required>
+        <br>
+        <input type="text" name="links" value="{{project.links}}" required>
+        <br>
+        <input type="text" name="tags" value="{{project.tags}}" required>
+        <br>
+        <input type="number" name="client_id" value="{{project.clientId}}" required>
+    </form>
+{% endblock %}
