@@ -8,18 +8,18 @@ use ModelPro\Exceptions\NotFoundException;
  * Data Access Object para a entidade de usuário.
  */
 class UserDAO extends AbstractDAO {
-    
-    public function get ($id) {
-        $query = 'SELECT * FROM users WHERE user_id = :id';
-        $sth = $this->database->prepare($query);
-        $sth->execute(['id' => $id]);
+    public function getClassname()
+    {
+        return 'ModelPro\Models\User';
+    }
 
-        $row = $sth->fetch();
+    public function getTableName()
+    {
+        return 'users';
+    }
 
-        if (empty($row)) {
-            throw new NotFoundException;
-        }
-
-        return new User($row['user_id'], $row['name']);
+    public function getPrimaryKey()
+    {
+        return 'user_id';
     }
 }
