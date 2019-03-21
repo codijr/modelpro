@@ -5,25 +5,30 @@ namespace ModelPro\Models;
  * Modelo de projeto.
  */
 class Project {
+    /** 
+     * Id auto-generado pelo banco de dados. Não precisa modificar.
+     */
     private $project_id;
     private $codename;
     private $code;
     private $start_date;
     private $end_date;
+    /**
+     * Status representa o status do projeto dentro do sistema. 
+     * Pode ser: 0 - Em andamento; 1 - Finalizado; 2 - Arquivado
+     */
     private $status;
-
     private $client_id;
-
     private $description;
     private $scope;
     private $links;
+    /** 
+     * Tags é uma string com valores diferentes separados por "|". 
+     * ex: Sistemas|Design|Social Media|Aplicativo. 
+     */
     private $tags;
 
-    public function __construct ($id=NULL, $codename, $code) {
-        $this->id = $id;
-        $this->codename = $codename;
-        $this->code = $code;
-    }
+    public function __construct () {}
 
     /**
      * Get o valor de project_id
@@ -31,18 +36,6 @@ class Project {
     public function getProjectId()
     {
         return $this->project_id;
-    }
-
-    /**
-     * Set o valor de project_id
-     *
-     * @return  self
-     */ 
-    public function setProjectId($project_id)
-    {
-        $this->project_id = $project_id;
-
-        return $this;
     }
 
     /**
@@ -126,7 +119,7 @@ class Project {
     }
 
     /**
-     * Get o valor de status
+     * Get o valor do status
      */ 
     public function getStatus()
     {
@@ -134,8 +127,7 @@ class Project {
     }
 
     /**
-     * Set o valor de status
-     *
+     * Set o valor do status
      * @return  self
      */ 
     public function setStatus($status)
@@ -206,7 +198,7 @@ class Project {
     }
 
     /**
-     * Get o valor de links
+     * Get o valor dos links
      */ 
     public function getLinks()
     {
@@ -214,7 +206,7 @@ class Project {
     }
 
     /**
-     * Set o valor de links
+     * Set o valor dos links
      *
      * @return  self
      */ 
@@ -226,7 +218,7 @@ class Project {
     }
 
     /**
-     * Get o valor de tags
+     * Get o valor das tags
      */ 
     public function getTags()
     {
@@ -234,8 +226,7 @@ class Project {
     }
 
     /**
-     * Set o valor de tags
-     *
+     * Set o valor das tags
      * @return  self
      */ 
     public function setTags($tags)

@@ -5,6 +5,9 @@ namespace ModelPro\Models;
  * Modelo do usuário.
  */
 class User {
+    /** 
+     * Id auto-generado pelo banco de dados. Não precisa modificar.
+     */
     private $user_id;
     private $username;
     private $password;
@@ -16,10 +19,7 @@ class User {
     private $job_title;
     private $entrance_semester;
 
-    public function __construct ($id=NULL, $name) {
-        $this->$id = $id;
-        $this->$name = $name;
-    }
+    public function __construct () {}
 
     /**
      * Get o valor de user_id
@@ -27,18 +27,6 @@ class User {
     public function getUserId()
     {
         return $this->user_id;
-    }
-
-    /**
-     * Set o valor de user_id
-     *
-     * @return  self
-     */ 
-    public function setUserId($user_id)
-    {
-        $this->user_id = $user_id;
-
-        return $this;
     }
 
     /**

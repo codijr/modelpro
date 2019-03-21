@@ -5,17 +5,15 @@ namespace ModelPro\Models;
  * Classe modelo para o cliente
  */
 class Client {
+    /** 
+     * Id auto-generado pelo banco de dados. Não precisa modificar.
+     */
     private $client_id;
     private $name;
     private $email;
     private $phone_number;
 
-    public function __construct ($id=NULL, $name, $email, $phone_number) {
-        $this->client_id = $id;
-        $this->name = $name;
-        $this->email = $email;
-        $this->phone_number = $phone_number;
-    }
+    public function __construct () {}
 
     /**
      * Get o valor de client_id
@@ -23,18 +21,6 @@ class Client {
     public function getClientId()
     {
         return $this->client_id;
-    }
-
-    /**
-     * Set o valor de client_id
-     *
-     * @return  self
-     */ 
-    public function setClientId($client_id)
-    {
-        $this->client_id = $client_id;
-
-        return $this;
     }
 
     /**
