@@ -60,7 +60,7 @@ class DashboardController extends AbstractController{
         try {
             $dao->insert($project);
         } catch (Exception $e) {
-            return $this->render('error.twig', ['errorMessage' => "Atualização não pode ser executada :(. ID: $id"]);
+            return $this->render('error.twig', ['errorMessage' => "Não foi possível inserir o projeto :("]);
         }
 
         return $this->dashboard();
