@@ -22,7 +22,7 @@ class AbstractController {
         $this->database = Database::instance();
         $this->config = Config::instance();
 
-        $loader = new Twig_Loader_Filesystem(__DIR__ . '/../views');
+        $loader = new Twig_Loader_Filesystem(__DIR__ . '/../Views');
         $this->view = new Twig_Environment($loader);
     }
 
