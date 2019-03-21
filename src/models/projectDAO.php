@@ -78,7 +78,7 @@ class ProjectDAO extends AbstractDAO {
 
     /** Get o cliente do projeto com id x */
     public function getClient($id) {
-        $query = 'SELECT * FROM clients, projects WHERE projects.client_id = clients.client_id AND project_id = ?';
+        $query = 'SELECT * FROM `clients`, `projects` WHERE projects.client_id = clients.client_id AND project_id = ?';
         $stmt = $this->database->prepare($query);
         $stmt->execute([$id]);
         $result = $stmt->fetchObject('ModelPro\Models\Client');
