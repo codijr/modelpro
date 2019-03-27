@@ -83,7 +83,7 @@ class Project {
      */ 
     public function getStartDate()
     {
-        return $this->start_date;
+        return date('d/m/Y', strtotime($this->start_date));
     }
 
     /**
@@ -103,7 +103,7 @@ class Project {
      */ 
     public function getEndDate()
     {
-        return $this->end_date;
+        return date('d/m/Y', strtotime($this->end_date));
     }
 
     /**
@@ -123,7 +123,15 @@ class Project {
      */ 
     public function getStatus()
     {
-        return $this->status;
+        if ($this->status == 0) {
+            return 'Em andamento';
+        } elseif ($this->status == 1) {
+            return 'Finalizado';
+        } elseif ($this->status == 2) {
+            return 'Arquivado';
+        } else {
+            return 'Valor inválido';
+        }
     }
 
     /**
