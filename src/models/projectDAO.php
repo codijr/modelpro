@@ -33,21 +33,23 @@ class ProjectDAO extends AbstractDAO {
         $query =   'INSERT INTO projects (`codename`, `code`, `start_date`, `end_date`, `status`, `client_id`, `description`, `scope`, `links`, `tags`) 
                     VALUES (:p1, :p2, :p3, :p4, :p5, :p6, :p7, :p8, :p9, :p10)';
         $stmt = $this->database->prepare($query);
-        $stmt->bindParam(':p1', $project->getCodename());
-        $stmt->bindParam(':p2', $project->getCode());
-        $stmt->bindParam(':p3', $project->getStartDate());
-        $stmt->bindParam(':p4', $project->getEndDate());
-        $stmt->bindParam(':p5', $project->getStatus());
-        $stmt->bindParam(':p6', $project->getClientId());
-        $stmt->bindParam(':p7', $project->getDescription());
-        $stmt->bindParam(':p8', $project->getScope());
-        $stmt->bindParam(':p9', $project->getLinks());
-        $stmt->bindParam(':p10', $project->getTags());
+        $stmt->bindValue(':p1', $project->getCodename());
+        $stmt->bindValue(':p2', $project->getCode());
+        $stmt->bindValue(':p3', $project->getStartDate());
+        $stmt->bindValue(':p4', $project->getEndDate());
+        $stmt->bindValue(':p5', $project->getStatus());
+        $stmt->bindValue(':p6', $project->getClientId());
+        $stmt->bindValue(':p7', $project->getDescription());
+        $stmt->bindValue(':p8', $project->getScope());
+        $stmt->bindValue(':p9', $project->getLinks());
+        $stmt->bindValue(':p10', $project->getTags());
         $stmt->execute();
 
         if ($this->database->commit() == false) {
             $this->database->rollBack();
+            return false;
         }
+        return true;
     }
 
     /** Update o projeto de id x */
@@ -58,22 +60,24 @@ class ProjectDAO extends AbstractDAO {
                     SET `codename`=:p1, `code`=:p2, `start_date`=:p3, `end_date`=:p4, `status`=:p5, `client_id`=:p6, `description`=:p7, `scope`=:p8, `links`=:p9, `tags`=:p10 
                     WHERE project_id = :id';
         $stmt = $this->database->prepare($query);
-        $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':p1', $project->getCodename());
-        $stmt->bindParam(':p2', $project->getCode());
-        $stmt->bindParam(':p3', $project->getStartDate());
-        $stmt->bindParam(':p4', $project->getEndDate());
-        $stmt->bindParam(':p5', $project->getStatus());
-        $stmt->bindParam(':p6', $project->getClientId());
-        $stmt->bindParam(':p7', $project->getDescription());
-        $stmt->bindParam(':p8', $project->getScope());
-        $stmt->bindParam(':p9', $project->getLinks());
-        $stmt->bindParam(':p10', $project->getTags());
+        $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':p1', $project->getCodename());
+        $stmt->bindValue(':p2', $project->getCode());
+        $stmt->bindValue(':p3', $project->getStartDate());
+        $stmt->bindValue(':p4', $project->getEndDate());
+        $stmt->bindValue(':p5', $project->getStatus());
+        $stmt->bindValue(':p6', $project->getClientId());
+        $stmt->bindValue(':p7', $project->getDescription());
+        $stmt->bindValue(':p8', $project->getScope());
+        $stmt->bindValue(':p9', $project->getLinks());
+        $stmt->bindValue(':p10', $project->getTags());
         $stmt->execute();
 
         if ($this->database->commit() == false) {
             $this->database->rollBack();
+            return false;
         }
+        return true;
     }
 
     /** Get o cliente do projeto com id x */
