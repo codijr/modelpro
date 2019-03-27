@@ -40,7 +40,6 @@ class ProjectController extends AbstractController{
         $params = $this->request->getParams();
 
         $project = new Project();
-        $project->setProjectId($id);
         $project->setCodename($params->get('codename'));
         $project->setCode($params->get('code'));
         $project->setStartDate($params->get('start_date'));
