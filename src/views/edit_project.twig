@@ -18,7 +18,11 @@
         <input type="date" name="start_date" value="{{project.startDate}}" required>
         <input type="date" name="end_date" value="{{project.endDate}}" required>
         <br>
-        <input type="number" name="status" value="{{project.status}}" required>
+        <select name="status" required>
+            <option value="0" {{project.status == 0 ? 'selected'}} >Em andamento</option>
+            <option value="1" {{project.status == 1 ? 'selected'}} >Finalizado</option>
+            <option value="2" {{project.status == 2 ? 'selected'}} >Arquivado</option>
+        </select>
         <br>
         <textarea name="scope" required>{{project.scope}}</textarea>
         <br>
