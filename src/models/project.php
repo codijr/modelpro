@@ -123,6 +123,14 @@ class Project {
      */ 
     public function getStatus()
     {
+        return $this->status;
+    }
+
+    /**
+     * Get a string representada pelo status 
+     */ 
+    public function getStatusString()
+    {
         if ($this->status == 0) {
             return 'Em andamento';
         } elseif ($this->status == 1) {
