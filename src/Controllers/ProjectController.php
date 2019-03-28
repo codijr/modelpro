@@ -3,6 +3,7 @@ namespace ModelPro\Controllers;
 
 use ModelPro\Core\Database;
 use ModelPro\Models\ProjectDAO;
+use ModelPro\Models\ClientDAO;
 use ModelPro\Exceptions\NotFoundException;
 use ModelPro\Models\Project;
 
@@ -23,12 +24,14 @@ class ProjectController extends AbstractController{
 
     public function edit ($id) {
         $dao = new ProjectDAO($this->database);
+        $daoc = new ClientDAO($this->database);
         try {
             $project = $dao->get($id);
+            $clients = $daoc->getAll();
         } catch (\Exception $e) {
             return $this->render('error.twig', ['errorMessage' => "Projeto não encontrado :(. ID: $id"]);
         }
-        return $this->render('edit_project.twig', ['project' => $project]);
+        return $this->render('edit_project.twig', ['project' => $project, 'clients' => $clients]);
     }
 
     public function update ($id) {

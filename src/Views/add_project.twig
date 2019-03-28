@@ -24,6 +24,10 @@
         <br>
         <input type="text" name="tags" placeholder="Tags" required>
         <br>
-        <input type="number" name="client_id" placeholder="ID do cliente" required>
+        <select name="client_id" required>
+            {% for client in clients %}
+                <option value="{{client.clientId}}">{{client.name}}</option>
+            {% endfor %}
+        </select>
     </form>
 {% endblock %}

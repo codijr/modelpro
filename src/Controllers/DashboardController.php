@@ -11,17 +11,19 @@ use ModelPro\Models\Project;
 class DashboardController extends AbstractController{
     /** Renderiza o dashboard */
     public function dashboard () {
-        // Pega todos os projetos
         $dao = new ProjectDAO($this->database);
-        $projects = $dao->getAll();
-        
-        // Pega todos os clientes
         $clientDAO = new ClientDAO($this->database);
-
-        // Cria um array com o id do cliente como chave e o nome como valor
-        $clients = [];
-        foreach ($clientDAO->getAll() as $client) {
-            $clients[$client->getClientId()] = $client->getName();
+        
+        try {
+            $projects = $dao->getAll();
+            // Cria um array com o id do cliente como chave e o nome como valor
+            // Isso é feito para pegar os nomes dos clientes e mostrar nos cards do dashboard
+            $clients = [];
+            foreach ($clientDAO->getAll() as $client) {
+                $clients[$client->getClientId()] = $client->getName();
+            }
+        } catch (\Throwable $th) {
+            return $this->render('error.twig', ['errorMessage' => 'Erro ao se comunicar com o servidor.']);
         }
 
         return $this->render('dashboard.twig', ["projects" => $projects, "clients" => $clients]);
@@ -29,7 +31,15 @@ class DashboardController extends AbstractController{
 
     /** Renderiza a página de adicionar projetos */
     public function addProject () {
-        return $this->render('add_project.twig', []);
+        $daoc = new ClientDAO($this->database);
+
+        try {
+            $clients = $daoc->getAll();
+        } catch (\Throwable $th) {
+            return $this->render('error.twig', ['errorMessage' => 'Erro ao se comunicar com o servidor.']);
+        }
+
+        return $this->render('add_project.twig', ["clients" => $clients]);
     }
 
     /** Salva projeto novo no BD e renderiza o dashboard */
@@ -38,6 +48,7 @@ class DashboardController extends AbstractController{
         if (!$this->request->isPost()) {
             return $this->render('error.twig', ['errorMessage' => 'Você não deve acessar essa página dessa forma >:(']);
         }
+
         // Pega os parametros da requisição, vindos do form
         $params = $this->request->getParams();
 
@@ -55,7 +66,6 @@ class DashboardController extends AbstractController{
         $project->setLinks($params->get('links'));
         $project->setTags($params->get('tags'));
 
-        // Realiza a operação no BD
         $dao = new ProjectDAO($this->database);
         try {
             $dao->insert($project);
