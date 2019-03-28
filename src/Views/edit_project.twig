@@ -10,13 +10,14 @@
             <a href="/project/{{project.projectId}}">Cancelar</a>
             <input type="submit" value="Salvar">
         </nav>
+        <br>
         <input type="text" name="codename" value="{{project.codename}}" required>
         <input type="number" name="code" value="{{project.code}}" required>
         <br>
-        <textarea name="description" required>{{project.description}}</textarea>
-        <br>
         <input type="date" name="start_date" value="{{project.startDate}}" required>
         <input type="date" name="end_date" value="{{project.endDate}}" required>
+        <br>
+        <textarea name="description" required>{{project.description}}</textarea>
         <br>
         <select name="status" required>
             <option value="0" {{project.status == 0 ? 'selected'}} >Em andamento</option>
