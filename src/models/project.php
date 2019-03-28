@@ -81,9 +81,17 @@ class Project {
     /**
      * Get o valor de start_date
      */ 
-    public function getStartDate()
+    public function getStartDateString()
     {
         return date('d/m/Y', strtotime($this->start_date));
+    }
+
+    /**
+     * Get o valor de start_date
+     */ 
+    public function getStartDate()
+    {
+        return $this->start_date;
     }
 
     /**
@@ -101,9 +109,17 @@ class Project {
     /**
      * Get o valor de end_date
      */ 
-    public function getEndDate()
+    public function getEndDateString()
     {
         return date('d/m/Y', strtotime($this->end_date));
+    }
+
+    /**
+     * Get o valor de end_date
+     */ 
+    public function getEndDate()
+    {
+        return $this->end_date;
     }
 
     /**
