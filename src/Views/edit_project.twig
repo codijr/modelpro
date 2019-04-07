@@ -28,6 +28,13 @@
         <textarea name="scope" required>{{project.scope}}</textarea>
         <br>
         <input type="text" name="links" value="{{project.links}}" required>
+        <div class="link-box">
+            <header>
+                Links
+                <input type="hidden" name="link-count" id="link-counter" value="0">
+                <button type="button" class="add-button">+</button>
+            </header>
+        </div>
         <br>
         <input type="text" name="tags" value="{{project.tags}}" required>
         <br>
