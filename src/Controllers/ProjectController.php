@@ -25,6 +25,8 @@ class ProjectController extends AbstractController{
     public function edit ($id) {
         $dao = new ProjectDAO($this->database);
         $daoc = new ClientDAO($this->database);
+        
+        $link_counter = 0;
         try {
             $project = $dao->get($id);
             $clients = $daoc->getAll();
@@ -42,6 +44,17 @@ class ProjectController extends AbstractController{
 
         $params = $this->request->getParams();
 
+        //var_dump($params);
+
+        $links = '';
+        $link_total = $params->getInt('link_count');
+        for ($index = 1; $index <= $link_total; $index++) {
+            if ($link_total > 1 && $index != 1) {
+                $links = $links . ' ';
+            }
+            $links = $links . $params->get("link$index");
+        }
+
         $project = new Project();
         $project->setCodename($params->get('codename'));
         $project->setCode($params->get('code'));
@@ -51,7 +64,7 @@ class ProjectController extends AbstractController{
         $project->setClientId($params->get('client_id'));
         $project->setDescription($params->get('description'));
         $project->setScope($params->get('scope'));
-        $project->setLinks($params->get('links'));
+        $project->setLinks($links);
         $project->setTags($params->get('tags'));
 
         $dao = new ProjectDAO($this->database);

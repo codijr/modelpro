@@ -238,6 +238,14 @@ class Project {
     }
 
     /**
+     * Get um array dos links
+     */ 
+    public function getLinkArray()
+    {
+        return explode(' ', $this->links);
+    }
+
+    /**
      * Set o valor dos links
      *
      * @return  self

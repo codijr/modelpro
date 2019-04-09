@@ -27,20 +27,26 @@
         <br>
         <textarea name="scope" required>{{project.scope}}</textarea>
         <br>
-        <input type="text" name="links" value="{{project.links}}" required>
+        <!--<input type="text" name="links" value="{{project.links}}" required>-->
         <div class="link-box">
             <header>
                 Links
-                <input type="hidden" name="link-count" id="link-counter" value="0">
+                <input type="hidden" name="link_count" id="link-counter" value="{{project.getLinkArray|length}}">
                 <button type="button" class="add-button">+</button>
             </header>
+            {% for link in project.getLinkArray %}
+            <div class="link-wrapper">
+                <input type="text" name="link{{loop.index}}" value="{{link}}" required>
+                <button type="button" class="remove-button">-</button>
+            </div>
+            {% endfor %}
         </div>
         <br>
         <input type="text" name="tags" value="{{project.tags}}" required>
         <br>
         <select name="client_id" required>
             {% for client in clients %}
-                <option value="{{client.clientId}}" {{client.clientId == project.clientId ? 'selected'}} >{{client.name}}</option>
+            <option value="{{client.clientId}}" {{client.clientId == project.clientId ? 'selected'}} >{{client.name}}</option>
             {% endfor %}
         </select>
     </form>
