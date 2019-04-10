@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2019 at 03:26 PM
+-- Generation Time: Apr 10, 2019 at 05:41 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 5.6.40
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `modelpro`
 --
+CREATE DATABASE IF NOT EXISTS `modelpro` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE `modelpro`;
 
 -- --------------------------------------------------------
 
@@ -51,8 +53,8 @@ CREATE TABLE `projects` (
   `client_id` int(11) DEFAULT NULL,
   `description` text COLLATE utf8_bin NOT NULL,
   `scope` text COLLATE utf8_bin NOT NULL,
-  `links` text COLLATE utf8_bin NOT NULL,
-  `tags` text COLLATE utf8_bin NOT NULL
+  `links` text COLLATE utf8_bin,
+  `tags` text COLLATE utf8_bin
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -71,6 +73,18 @@ CREATE TABLE `users` (
   `phone_number` varchar(12) COLLATE utf8_bin NOT NULL,
   `job_title` varchar(36) COLLATE utf8_bin NOT NULL,
   `entrance_semester` varchar(6) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_in_project`
+--
+
+CREATE TABLE `users_in_project` (
+  `project_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `position` varchar(255) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -95,6 +109,13 @@ ALTER TABLE `projects`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indexes for table `users_in_project`
+--
+ALTER TABLE `users_in_project`
+  ADD PRIMARY KEY (`project_id`,`user_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -127,6 +148,13 @@ ALTER TABLE `users`
 --
 ALTER TABLE `projects`
   ADD CONSTRAINT `projects_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `clients` (`client_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `users_in_project`
+--
+ALTER TABLE `users_in_project`
+  ADD CONSTRAINT `users_in_project_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `users_in_project_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
