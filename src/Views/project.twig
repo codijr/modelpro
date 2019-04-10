@@ -20,7 +20,10 @@
     <p>{{project.scope}}</p>
     <hr>
     <h3>Links</h3>
-    <p>{{project.links}}</p>
+    {% for link in project.linkArray %}
+        <a href="{{link}}">{{link}}</a>
+        <br>
+    {% endfor %}
     <hr>
     <h3>Cliente</h3>
     <p>{{client.name}}</p>
@@ -28,5 +31,13 @@
     <p>{{client.phoneNumber}}</p>
     <hr>
     <h3>Equipe</h3>
-    <p>user.name, user.job_title</p>
+    {% if team %}
+        {% for user in team %}
+            <p>{{user.name}} - {{user.position}}</p>
+            <p>{{user.email}} - {{user.phone_number}}</p>
+            <br>
+        {% endfor %}
+    {% else %}
+        <p>Nenhum membro nesse projeto :(</p>    
+    {% endif %}
 {% endblock %}
