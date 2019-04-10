@@ -5,6 +5,7 @@ namespace ModelPro\Models;
  * Modelo de projeto.
  */
 class Project {
+    
     /** 
      * Id auto-generado pelo banco de dados. Não precisa modificar.
      */
@@ -21,12 +22,20 @@ class Project {
     private $client_id;
     private $description;
     private $scope;
+    /**
+     * Links é uma string composta por urls separados por " ".
+     * Essa variável pode ser acessada por setLinks, getLinks, setLinkArray e getLinkArray.
+     * As funções get/setLinkArray tratam da string como array, para facilitar a interação fora da classe.
+     * Porem, dentro do BD ela é guardada como string.
+     */
     private $links;
+    const MAX_LINKS = 30;
     /** 
      * Tags é uma string com valores diferentes separados por "|". 
      * ex: Sistemas|Design|Social Media|Aplicativo. 
      */
     private $tags;
+    const MAX_TAGS = 10;
 
     public function __construct () {}
 
@@ -262,12 +271,14 @@ class Project {
      */ 
     public function setLinkArray ($params) {
         $links = '';
-        $link_total = $params->getInt('link_count');
-        for ($index = 1; $index <= $link_total; $index++) {
-            if ($link_total > 1 && $index != 1) {
-                $links = $links . ' ';
+        $max = Project::MAX_LINKS;
+        for ($index = 1; $index <= $max; $index++) {
+            if ($params->get("link$index")) {
+                if ($index != 1) {
+                    $links = $links . ' ';
+                }
+                $links = $links . $params->get("link$index");
             }
-            $links = $links . $params->get("link$index");
         }
         $this->setLinks($links);
     }

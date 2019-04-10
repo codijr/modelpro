@@ -33,7 +33,6 @@
         <div class="link-box">
             <header>
                 <h4>Links</h4>
-                <input type="hidden" name="link_count" id="link-counter" value="{{project.getLinkArray|length}}">
                 <button type="button" class="add-button">+</button>
             </header>
             {% for link in project.getLinkArray %}
@@ -54,7 +53,6 @@
         <div class="member-box">
             <header>
                 <h4>Equipe</h4>
-                <input type="hidden" name="member_count" id="member-counter" value="{{team|length}}">
                 <select id="add-member-selector">
                     {% for user in users %}
                     <option value="{{user.userId}}" >{{user.name}}</option>
@@ -65,12 +63,12 @@
             <div class="member-wrapper">
                 {% for member in team %}
                 <div class="member-wrapper">
-                        <select name="member" required>
+                        <select name="member{{loop.index}}" required>
                             {% for user in users %}
                             <option value="{{user.userId}}" {{user.userId == member.user_id ? 'selected'}} >{{user.name}}</option>
                             {% endfor %}
                         </select>
-                    <input type="text" name="member_position" value="{{member.position}}" required>
+                    <input type="text" name="member{{loop.index}}_position" value="{{member.position}}" required>
                     <button type="button" class="remove-member-button">-</button>
                 </div>
                 {% endfor %}

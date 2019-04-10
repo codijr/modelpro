@@ -2,14 +2,14 @@
  * Executado ao carregar o DOM.
  */
 const link_container = '.link-box';
-const link_counter = '#link-counter';
-
 let links = 0;
 
+const member_container = '.member-box';
+let members = 0;
+
 $(document).ready (()=> {
-    // Pega o número de links. Dessa forma tenho uma contagem
-    // interna precisa desse número.
-    links = parseInt($(link_counter).val());
+    // Pega o número de links. Dessa forma tenho uma contagem interna precisa desse número.
+    links = $(link_container +' .link-wrapper').length;
     
     $(link_container).on ('click', '.add-button', () => {
         addLink();
@@ -29,15 +29,17 @@ function addLink () {
         '<input type="text" name="link'+(links+1)+'" required>\n'+
         '<button type="button" class="remove-button">-</button>\n'+
     '</div>');
-    $(link_container).append(element);
-    links += 1;
-    $(link_counter).val(links);
+    if (links + 1 <= 30) {
+        links += 1;
+        $(link_container).append(element);
+    } else {
+        return false;
+    }
 }
 
 function removeLink (link_wrapper) {
-    link_wrapper.remove();
     links -= 1;
-    $(link_counter).val(links);
+    link_wrapper.remove();
 }
 
 function addMember () {
@@ -45,5 +47,6 @@ function addMember () {
 }
 
 function removeMember (member_wrapper) {
+    members -= 1;
     member_wrapper.remove();
 }
