@@ -22,4 +22,12 @@ class UserDAO extends AbstractDAO {
     {
         return 'user_id';
     }
+
+    public function insert ($user) {
+
+    }
+
+    public function update ($id, $user) {
+
+    }
 }

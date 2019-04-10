@@ -63,7 +63,7 @@ class DashboardController extends AbstractController{
         $project->setClientId($params->get('client_id'));
         $project->setDescription($params->get('description'));
         $project->setScope($params->get('scope'));
-        $project->setLinks($params->get('links'));
+        $project->setLinkArray($params);
         $project->setTags($params->get('tags'));
 
         $dao = new ProjectDAO($this->database);

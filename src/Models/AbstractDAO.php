@@ -29,7 +29,7 @@ abstract class AbstractDAO {
         $result = $stmt->fetchObject($this->getClassName());
 
         if (empty($result)) {
-            throw new NotFoundException;
+            return null;
         }
 
         return $result;
@@ -45,7 +45,7 @@ abstract class AbstractDAO {
         $results = $stmt->fetchAll(PDO::FETCH_CLASS, $this->getClassName());
 
         if (empty($results)) {
-            throw new NotFoundException;
+            return null;
         }
 
         return $results;
@@ -63,7 +63,10 @@ abstract class AbstractDAO {
 
         if ($this->database->commit() == false) {
             $this->database->rollBack();
+            return false;
         }
+
+        return true;
     }
 
     /**

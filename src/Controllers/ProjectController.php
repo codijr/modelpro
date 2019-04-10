@@ -6,6 +6,7 @@ use ModelPro\Models\ProjectDAO;
 use ModelPro\Models\ClientDAO;
 use ModelPro\Exceptions\NotFoundException;
 use ModelPro\Models\Project;
+use ModelPro\Models\UserDAO;
 
 /**
  * Controller da página individual do projeto.
@@ -16,24 +17,26 @@ class ProjectController extends AbstractController{
         try {
             $project = $dao->get($id);
             $client = $dao->getClient($id);
+            $team = $dao->getTeam($id);
         } catch (\Exception $e) {
             return $this->render('error.twig', ['errorMessage' => "Projeto não encontrado :(. ID: $id"]);
         }
-        return $this->render('project.twig', ['project' => $project, 'client' => $client]);
+        return $this->render('project.twig', ['project' => $project, 'client' => $client, 'team' => $team]);
     }
 
     public function edit ($id) {
         $dao = new ProjectDAO($this->database);
         $daoc = new ClientDAO($this->database);
-        
-        $link_counter = 0;
+        $daou = new UserDAO($this->database);
         try {
             $project = $dao->get($id);
             $clients = $daoc->getAll();
+            $team = $dao->getTeam($id);
+            $users = $daou->getAll();
         } catch (\Exception $e) {
             return $this->render('error.twig', ['errorMessage' => "Projeto não encontrado :(. ID: $id"]);
         }
-        return $this->render('edit_project.twig', ['project' => $project, 'clients' => $clients]);
+        return $this->render('edit_project.twig', ['project' => $project, 'team' => $team,'clients' => $clients, 'users' => $users]);
     }
 
     public function update ($id) {
@@ -44,17 +47,6 @@ class ProjectController extends AbstractController{
 
         $params = $this->request->getParams();
 
-        //var_dump($params);
-
-        $links = '';
-        $link_total = $params->getInt('link_count');
-        for ($index = 1; $index <= $link_total; $index++) {
-            if ($link_total > 1 && $index != 1) {
-                $links = $links . ' ';
-            }
-            $links = $links . $params->get("link$index");
-        }
-
         $project = new Project();
         $project->setCodename($params->get('codename'));
         $project->setCode($params->get('code'));
@@ -64,7 +56,7 @@ class ProjectController extends AbstractController{
         $project->setClientId($params->get('client_id'));
         $project->setDescription($params->get('description'));
         $project->setScope($params->get('scope'));
-        $project->setLinks($links);
+        $project->setLinkArray($params);
         $project->setTags($params->get('tags'));
 
         $dao = new ProjectDAO($this->database);

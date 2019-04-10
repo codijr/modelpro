@@ -258,6 +258,21 @@ class Project {
     }
 
     /**
+     * Set um array dos links a partir dos parametros
+     */ 
+    public function setLinkArray ($params) {
+        $links = '';
+        $link_total = $params->getInt('link_count');
+        for ($index = 1; $index <= $link_total; $index++) {
+            if ($link_total > 1 && $index != 1) {
+                $links = $links . ' ';
+            }
+            $links = $links . $params->get("link$index");
+        }
+        $this->setLinks($links);
+    }
+
+    /**
      * Get o valor das tags
      */ 
     public function getTags()
@@ -275,4 +290,5 @@ class Project {
 
         return $this;
     }
+
 }

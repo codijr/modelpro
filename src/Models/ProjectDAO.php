@@ -81,7 +81,7 @@ class ProjectDAO extends AbstractDAO {
     }
 
     /** Get o cliente do projeto com id x */
-    public function getClient($id) {
+    public function getClient ($id) {
         $query = 'SELECT * FROM `clients`, `projects` WHERE projects.client_id = clients.client_id AND project_id = ?';
         $stmt = $this->database->prepare($query);
         $stmt->execute([$id]);
@@ -89,8 +89,33 @@ class ProjectDAO extends AbstractDAO {
         return $result;
     }
 
-    /** Get a equipe trabalhando no projeto */
-    public function getTeam($id) {
-        // TODO
+    /** 
+     * Get a equipe trabalhando no projeto
+     * Retorna um array simples com informações dos users e positions 
+     */
+    public function getTeam ($id) {
+        $query = 'SELECT u.`user_id`, u.`name`, u.`email`, u.`phone_number`, up.`position`, up.`project_id` FROM users AS u, users_in_project AS up WHERE u.`user_id` = up.`user_id` AND up.`project_id` = ?';
+        $stmt = $this->database->prepare($query);
+        $stmt->execute([$id]);
+
+        $result = $stmt->fetchAll();
+        if (empty($result)) {
+            return null;
+        }
+
+        return $result;
+    }
+
+    /** Set a equipe trabalhando no projeto */
+    public function setTeam ($id, $users) {
+        $this->database->beginTransaction();
+
+        $query = "INSERT INTO users_in_project VALUES ()";
+
+        if ($this->database->commit() == false) {
+            $this->database->rollBack();
+            return false;
+        }
+        return true;
     }
 }

@@ -4,6 +4,10 @@
     {{project.codename}} - Modo edição
 {% endblock %}
 
+{% block scripts %}
+    <script src="../../src/Views/script/edit.js"></script>
+{% endblock %}
+
 {% block content %}
     <form method="POST" action="update">
         <nav>
@@ -24,13 +28,11 @@
             <option value="1" {{project.status == 1 ? 'selected'}} >Finalizado</option>
             <option value="2" {{project.status == 2 ? 'selected'}} >Arquivado</option>
         </select>
-        <br>
+        <h4>Escopo</h4>
         <textarea name="scope" required>{{project.scope}}</textarea>
-        <br>
-        <!--<input type="text" name="links" value="{{project.links}}" required>-->
         <div class="link-box">
             <header>
-                Links
+                <h4>Links</h4>
                 <input type="hidden" name="link_count" id="link-counter" value="{{project.getLinkArray|length}}">
                 <button type="button" class="add-button">+</button>
             </header>
@@ -41,13 +43,38 @@
             </div>
             {% endfor %}
         </div>
-        <br>
+        <h4>Tags</h4>
         <input type="text" name="tags" value="{{project.tags}}" required>
-        <br>
+        <h4>Cliente</h4>
         <select name="client_id" required>
             {% for client in clients %}
             <option value="{{client.clientId}}" {{client.clientId == project.clientId ? 'selected'}} >{{client.name}}</option>
             {% endfor %}
         </select>
+        <div class="member-box">
+            <header>
+                <h4>Equipe</h4>
+                <input type="hidden" name="member_count" id="member-counter" value="{{team|length}}">
+                <select id="add-member-selector">
+                    {% for user in users %}
+                    <option value="{{user.userId}}" >{{user.name}}</option>
+                    {% endfor %}
+                </select>
+                <button type="button" class="add-member-button">+</button>
+            </header>
+            <div class="member-wrapper">
+                {% for member in team %}
+                <div class="member-wrapper">
+                        <select name="member" required>
+                            {% for user in users %}
+                            <option value="{{user.userId}}" {{user.userId == member.user_id ? 'selected'}} >{{user.name}}</option>
+                            {% endfor %}
+                        </select>
+                    <input type="text" name="member_position" value="{{member.position}}" required>
+                    <button type="button" class="remove-member-button">-</button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </form>
 {% endblock %}

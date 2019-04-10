@@ -4,6 +4,10 @@
     Novo Projeto
 {% endblock %}
 
+{% block scripts %}
+    <script src="../../src/Views/script/edit.js"></script>
+{% endblock %}
+
 {% block content %}
     <form method="POST" action="/dashboard/add-project/save">
         <nav>
@@ -20,7 +24,13 @@
         <br>
         <textarea name="scope" placeholder="Escopo" required></textarea>
         <br>
-        <input type="text" name="links" placeholder="Links" required>
+        <div class="link-box">
+            <header>
+                <h4>Links</h4>
+                <input type="hidden" name="link_count" id="link-counter" value="0">
+                <button type="button" class="add-button">+</button>
+            </header>
+        </div>
         <br>
         <input type="text" name="tags" placeholder="Tags" required>
         <br>
