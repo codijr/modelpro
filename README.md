@@ -13,4 +13,4 @@ Antes de instalar o sistema, é necessário um ambiente com Apache, MySQL e PHP 
     ```
 3.  Agora deve estar tudo pronto. O Composer irá utilizar os dados do ``composer.json`` para instalar as dependências necessárias. Basta iniciar o servidor e banco de dados. Os dados de acesso podem ser modificados no arquivo ``app.json``. 
 
-    Também estão disponíveis na pasta **db** os arquivos de configuração do banco de dados. Basta importar o ``modelpro.sql`` para criar as tabelas e o ``clients.sql``, ``projects.sql`` e ``users.sql`` para preenchê-las com informações de exemplo.
+    Também estão disponíveis na pasta **db** os arquivos de configuração do banco de dados. Basta importar o ``modelpro.sql`` para criar as tabelas e o ``seed.sql`` para preenchê-las com informações de exemplo.
