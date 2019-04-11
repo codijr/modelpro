@@ -2,7 +2,8 @@
 namespace ModelPro\Core;
 
 /**
- * Singleton das configurações.
+ * Singleton das configurações do projeto. A sua função principal é pegar os valores do app.json.
+ * Use a gunção get para pegar os valores.
  */
 class Config {
     private static $data;

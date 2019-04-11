@@ -1,0 +1,43 @@
+{% extends 'layout.twig' %}
+
+{% block title %}
+    {{project.code}} - {{project.codename}}
+{% endblock %}
+
+{% block content %}
+    <nav>
+        <a href="/dashboard">Retornar</a>
+        <a href="/project/{{project.projectId}}/edit">Editar</a>
+    </nav>
+    <hr>
+    <h2>{{project.code}} - {{project.codename}}</h2>
+    <p>{{project.statusString}}</p>
+    <p>{{project.description}}</p>
+    <p>{{project.startDateString}}  -  {{project.endDateString}}</p>
+    <p>{{project.tags}}</p>
+    <hr>
+    <h3>Escopo</h3>
+    <p>{{project.scope}}</p>
+    <hr>
+    <h3>Links</h3>
+    {% for link in project.linkArray %}
+        <a href="{{link}}">{{link}}</a>
+        <br>
+    {% endfor %}
+    <hr>
+    <h3>Cliente</h3>
+    <p>{{client.name}}</p>
+    <p>{{client.email}}</p>
+    <p>{{client.phoneNumber}}</p>
+    <hr>
+    <h3>Equipe</h3>
+    {% if team %}
+        {% for user in team %}
+            <p>{{user.name}} - {{user.position}}</p>
+            <p>{{user.email}} - {{user.phone_number}}</p>
+            <br>
+        {% endfor %}
+    {% else %}
+        <p>Nenhum membro nesse projeto :(</p>    
+    {% endif %}
+{% endblock %}

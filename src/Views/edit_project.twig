@@ -1,0 +1,78 @@
+{% extends 'layout.twig' %}
+
+{% block title %}
+    {{project.codename}} - Modo edição
+{% endblock %}
+
+{% block scripts %}
+    <script src="../../src/Views/script/edit.js"></script>
+{% endblock %}
+
+{% block content %}
+    <form method="POST" action="update">
+        <nav>
+            <a href="/project/{{project.projectId}}">Cancelar</a>
+            <input type="submit" value="Salvar">
+        </nav>
+        <br>
+        <input type="text" name="codename" value="{{project.codename}}" required>
+        <input type="number" name="code" value="{{project.code}}" required>
+        <br>
+        <input type="date" name="start_date" value="{{project.startDate}}" required>
+        <input type="date" name="end_date" value="{{project.endDate}}" required>
+        <br>
+        <textarea name="description" required>{{project.description}}</textarea>
+        <br>
+        <select name="status" required>
+            <option value="0" {{project.status == 0 ? 'selected'}} >Em andamento</option>
+            <option value="1" {{project.status == 1 ? 'selected'}} >Finalizado</option>
+            <option value="2" {{project.status == 2 ? 'selected'}} >Arquivado</option>
+        </select>
+        <h4>Escopo</h4>
+        <textarea name="scope" required>{{project.scope}}</textarea>
+        <div class="link-box">
+            <header>
+                <h4>Links</h4>
+                <button type="button" class="add-button">+</button>
+            </header>
+            {% for link in project.getLinkArray %}
+            <div class="link-wrapper">
+                <input type="text" name="link{{loop.index}}" value="{{link}}" required>
+                <button type="button" class="remove-button">-</button>
+            </div>
+            {% endfor %}
+        </div>
+        <h4>Tags</h4>
+        <input type="text" name="tags" value="{{project.tags}}" required>
+        <h4>Cliente</h4>
+        <select name="client_id" required>
+            {% for client in clients %}
+            <option value="{{client.clientId}}" {{client.clientId == project.clientId ? 'selected'}} >{{client.name}}</option>
+            {% endfor %}
+        </select>
+        <div class="member-box">
+            <header>
+                <h4>Equipe</h4>
+                <select id="add-member-selector">
+                    {% for user in users %}
+                    <option value="{{user.userId}}" >{{user.name}}</option>
+                    {% endfor %}
+                </select>
+                <button type="button" class="add-member-button">+</button>
+            </header>
+            <div class="member-wrapper">
+                {% for member in team %}
+                <div class="member-wrapper">
+                        <select name="member{{loop.index}}" required>
+                            {% for user in users %}
+                            <option value="{{user.userId}}" {{user.userId == member.user_id ? 'selected'}} >{{user.name}}</option>
+                            {% endfor %}
+                        </select>
+                    <input type="text" name="member{{loop.index}}_position" value="{{member.position}}" required>
+                    <button type="button" class="remove-member-button">-</button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </form>
+{% endblock %}
